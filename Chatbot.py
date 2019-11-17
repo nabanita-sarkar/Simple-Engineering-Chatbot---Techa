@@ -1,9 +1,8 @@
-#Meet TECHA: your technical friend
 
 #import necessary libraries
 import io
 import random
-import string # to process standard python strings
+import string 
 import warnings
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -13,18 +12,17 @@ warnings.filterwarnings('ignore')
 
 import nltk
 from nltk.stem import WordNetLemmatizer
-nltk.download('popular', quiet=True) # for downloading packages
+nltk.download('popular', quiet=True) 
 
 
 nltk.download('punkt') 
 nltk.download('wordnet') 
 
 fin = "Engineering is the use of scientific principles to design and build machines, structures, and other items, including bridges, tunnels, roads, vehicles, and buildings.[1] The discipline of engineering encompasses a broad range of more specialized fields of engineering, each with a more specific emphasis on particular areas of applied mathematics, applied science, and types of application. See glossary of engineering.The term engineering is derived from the Latin ingenium, meaning cleverness and ingeniare, meaning to contrive, devise.The American Engineers Council for Professional Development (ECPD, the predecessor of ABET)[3] has defined engineering as:The creative application of scientific principles to design or develop structures, machines, apparatus, or manufacturing processes, or works utilizing them singly or in combination; or to construct or operate the same with full cognizance of their design; or to forecast their behavior under specific operating conditions; all as respects an intended function, economics of operation and safety to life and property.Engineering has existed since ancient times, when humans devised inventions such as the wedge, lever, wheel and pulley, etc.The term engineering is derived from the word engineer, which itself dates back to 1390 when an engine'er (literally, one who builds or operates a siege engine) referred to a constructor of military engines. In this context, now obsolete, an engine referred to a military machine, i.e., a mechanical contraption used in war (for example, a catapult). Notable examples of the obsolete usage which have survived to the present day are military engineering corps, e.g., the U.S. Army Corps of Engineers.The word engine itself is of even older origin, ultimately deriving from the Latin ingenium, meaning innate quality, especially mental power, hence a clever invention."
-#Reading in the corpus
-#with open('Chatbot.gdoc','r', encoding='utf8', errors ='ignore') as fin:
+
 raw = fin.lower()
 
-#TOkenisation
+#Tokenisation
 sent_tokens = nltk.sent_tokenize(raw)# converts to list of sentences 
 word_tokens = nltk.word_tokenize(raw)# converts to list of words
 
@@ -50,7 +48,7 @@ def greeting(sentence):
 
 # Generating response
 def response(user_response):
-    robo_response=''
+    techa_response=''
     sent_tokens.append(user_response)
     TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
     tfidf = TfidfVec.fit_transform(sent_tokens)
@@ -60,11 +58,11 @@ def response(user_response):
     flat.sort()
     req_tfidf = flat[-2]
     if(req_tfidf==0):
-        robo_response=robo_response+"I am sorry! I don't understand you"
+        techa_response=techa_response+"I am sorry! I don't understand you"
         return robo_response
     else:
-        robo_response = robo_response+sent_tokens[idx]
-        return robo_response
+        techa_response = techa_response+sent_tokens[idx]
+        return techa_response
 
 
 flag=True
